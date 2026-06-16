@@ -251,7 +251,23 @@ window.location.href = `/track?id=${data.id}`;
       ))}
     </div>
   )}
+<div className="mt-4">
+  <label className="block mb-2 font-semibold">
+    Tip Percentage (%)
+  </label>
 
+  <input
+    type="number"
+    min="0"
+    max="100"
+    placeholder="Enter tip %"
+    className="w-full border border-gray-300 rounded-xl p-3 text-black"
+    onChange={(e) => {
+      const percent = Number(e.target.value) || 0;
+      setTip((subtotal * percent) / 100);
+    }}
+  />
+</div>
   <div className="mt-4">
     <p>Subtotal: ₹{subtotal}</p>
     <p>Tip: ₹{tip}</p>

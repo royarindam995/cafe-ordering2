@@ -170,12 +170,12 @@ export default function AdminPage() {
                         className="bg-white border border-gray-200 rounded-xl px-4 py-3 flex justify-between"
                       >
                         <span className="font-medium text-black">
-                          {item.name}
-                        </span>
+  {item.name} × {item.quantity || 1}
+</span>
 
                         <span className="font-bold text-amber-700">
-                          ₹{item.price}
-                        </span>
+  ₹{Number(item.price) * Number(item.quantity || 1)}
+</span>
                       </div>
                     ))}
                   </div>
