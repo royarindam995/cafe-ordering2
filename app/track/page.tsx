@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 export default function TrackPage() {
-  const searchParams = useSearchParams();
-  const orderId = searchParams.get("id");
+  const orderId = null;
 
   const [order, setOrder] = useState<any>(null);
 
