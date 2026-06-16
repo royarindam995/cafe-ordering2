@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
-export default function TrackPage() {
-  const orderId = null;
+function TrackContent() {
+  const searchParams = useSearchParams();
+  const orderId = searchParams.get("id");
 
   const [order, setOrder] = useState<any>(null);
 
@@ -87,5 +89,14 @@ export default function TrackPage() {
         </p>
       </div>
     </main>
+  );
+}
+
+
+export default function TrackPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TrackContent />
+    </Suspense>
   );
 }
