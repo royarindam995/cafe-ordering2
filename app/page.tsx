@@ -13,6 +13,7 @@ export default function Home() {
   const [items, setItems] = useState<any[]>([]);
   const [cart, setCart] = useState<any[]>([]);
   const [tip, setTip] = useState(0);
+  const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
     loadMenu();
@@ -143,6 +144,12 @@ window.location.href = `/track?id=${data.id}`;
           <h1 className="text-5xl font-bold text-gray-900">
             ☕ Arindam Cafe
           </h1>
+          <button
+  onClick={() => setShowCart(true)}
+  className="fixed top-5 right-5 z-50 bg-black text-white px-4 py-2 rounded-xl text-2xl"
+>
+  ☰
+</button>
 
           <p className="text-gray-700 mt-2">
             Fresh Coffee • Snacks • Desserts
@@ -188,10 +195,17 @@ window.location.href = `/track?id=${data.id}`;
       </div>
 
       {/* Cart */}
-      <div className="fixed bottom-6 right-6 bg-black text-white p-5 rounded-2xl shadow-2xl w-[340px] max-h-[80vh] overflow-y-auto">
+{showCart && (
+<div className="fixed top-0 right-0 h-screen bg-black text-white p-5 shadow-2xl w-[340px] overflow-y-auto z-50">
   <h3 className="font-bold text-xl mb-3">
     🛒 Cart
   </h3>
+  <button
+  onClick={() => setShowCart(false)}
+  className="mb-4 bg-red-600 px-3 py-2 rounded-lg"
+>
+  ✕ Close
+</button>
 
   {cart.length === 0 ? (
     <p className="text-gray-400">
@@ -257,33 +271,26 @@ window.location.href = `/track?id=${data.id}`;
   </label>
 
   <input
-    type="number"
-    min="0"
-    max="100"
-    placeholder="Enter tip %"
-    className="w-full border border-gray-300 rounded-xl p-3 text-black"
-    onChange={(e) => {
-      const percent = Number(e.target.value) || 0;
-      setTip((subtotal * percent) / 100);
-    }}
-  />
+  type="number"
+  min="0"
+  max="100"
+  placeholder="Enter tip %"
+  style={{
+    backgroundColor: "white",
+    color: "black",
+    width: "100%",
+    padding: "12px",
+    borderRadius: "12px",
+    border: "1px solid #ccc",
+  }}
+  onChange={(e) => {
+    const percent = Number(e.target.value) || 0;
+    setTip((subtotal * percent) / 100);
+  }}
+/>
 </div>
   <div className="mt-4">
-  <div className="mb-3">
-  <label className="block mb-1">
-    Tip Percentage (%)
-  </label>
-
-  <input
-    type="number"
-    placeholder="Enter tip %"
-    className="w-full p-2 rounded border text-black"
-    onChange={(e) => {
-      const percent = Number(e.target.value) || 0;
-      setTip((subtotal * percent) / 100);
-    }}
-  />
-</div>
+  
     <p>Subtotal: ₹{subtotal}</p>
     <p>Tip: ₹{tip}</p>
 
@@ -299,6 +306,7 @@ window.location.href = `/track?id=${data.id}`;
     Place Order
   </button>
 </div>
-    </main>
-  );
+)}
+</main>
+);
 }
