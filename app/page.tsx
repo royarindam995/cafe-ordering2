@@ -14,6 +14,10 @@ export default function Home() {
   const [cart, setCart] = useState<any[]>([]);
   const [tip, setTip] = useState(0);
   const [showCart, setShowCart] = useState(false);
+  const cartCount = cart.reduce(
+  (sum, item) => sum + (item.quantity || 1),
+  0
+);
 
   useEffect(() => {
     loadMenu();
@@ -148,7 +152,7 @@ window.location.href = `/track?id=${data.id}`;
   onClick={() => setShowCart(true)}
   className="fixed top-5 right-5 z-50 bg-black text-white px-4 py-2 rounded-xl text-2xl"
 >
-  ☰
+  🛒 Cart ({cartCount})
 </button>
 
           <p className="text-gray-700 mt-2">
