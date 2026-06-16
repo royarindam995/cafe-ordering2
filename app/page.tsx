@@ -5,7 +5,10 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
 export default function Home() {
-  const tableNumber = "1";
+  const tableNumber =
+  typeof window !== "undefined"
+    ? new URLSearchParams(window.location.search).get("table") || "1"
+    : "1";
 
   const [items, setItems] = useState<any[]>([]);
   const [cart, setCart] = useState<any[]>([]);
