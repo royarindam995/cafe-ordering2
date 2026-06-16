@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+
 import { supabase } from "@/lib/supabase";
 
 export default function Home() {
-  const searchParams = useSearchParams();
-const tableNumber = searchParams.get("table") || "1";
+  const tableNumber = "1";
 
   const [items, setItems] = useState<any[]>([]);
   const [cart, setCart] = useState<any[]>([]);
