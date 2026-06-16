@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 export default function Home() {
-  const searchParams = useSearchParams();
-  const tableNumber = searchParams.get("table") || "1";
+  const tableNumber = "1";
 
   const [items, setItems] = useState<any[]>([]);
   const [cart, setCart] = useState<any[]>([]);
@@ -158,14 +156,11 @@ window.location.href = `/track?id=${data.id}`;
               key={item.id}
               className="bg-white rounded-2xl overflow-hidden shadow-xl hover:scale-105 transition duration-300"
             >
-              <img
-  src={
-    item.image_url ||
-    "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800"
-  }
+             <img
+  src={item.image_url}
   alt={item.name}
   className="w-full h-56 object-cover"
-/>
+/> 
 
               <div className="p-5">
                 <h2 className="text-2xl font-bold text-gray-900">
