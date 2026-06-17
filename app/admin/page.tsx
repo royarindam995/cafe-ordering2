@@ -40,6 +40,24 @@ export default function AdminPage() {
 
     setOrders(data || []);
   }
+  async function updateStatus(
+  id: string,
+  status: string
+) {
+  console.log("Updating:", id, status);
+
+  const { error } = await supabase
+    .from("orders")
+    .update({ status })
+    .eq("id", id);
+
+  if (error) {
+    console.log(error);
+    alert(error.message);
+  }
+
+  loadOrders();
+}
 
   async function markReady(id: string) {
     await supabase
@@ -125,14 +143,46 @@ export default function AdminPage() {
                   </h2>
 
                   <span
-                    className={`px-4 py-2 rounded-full text-sm font-bold ${
-                      order.status === "ready"
-                        ? "bg-green-500"
-                        : "bg-red-500"
-                    }`}
-                  >
-                    {order.status}
-                  </span>
+  className={`px-4 py-2 rounded-full text-sm font-bold ${
+    order.status === "new"
+      ? "bg-red-500"
+      : order.status === "preparing"
+      ? "bg-yellow-500"
+      : order.status === "ready"
+      ? "bg-green-500"
+      : "bg-blue-500"
+  }`}
+>
+  {order.status}
+</span>
+<div className="flex gap-2 mt-3">
+  <button
+    onClick={() =>
+      updateStatus(order.id, "preparing")
+    }
+    className="bg-yellow-500 text-white px-3 py-1 rounded-lg"
+  >
+    Preparing
+  </button>
+
+  <button
+    onClick={() =>
+      updateStatus(order.id, "ready")
+    }
+    className="bg-green-500 text-white px-3 py-1 rounded-lg"
+  >
+    Ready
+  </button>
+
+  <button
+    onClick={() =>
+      updateStatus(order.id, "delivered")
+    }
+    className="bg-blue-500 text-white px-3 py-1 rounded-lg"
+  >
+    Delivered
+  </button>
+</div>
                 </div>
 
                 {/* Body */}

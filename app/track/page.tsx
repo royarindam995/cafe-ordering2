@@ -75,10 +75,10 @@ function TrackContent() {
         </p>
 
         <div className="text-3xl font-bold text-black">
-          {order.status === "ready"
-            ? "✅ Ready"
-            : "☕ Preparing"}
-        </div>
+  {order.status === "preparing" && "👨‍🍳 Preparing"}
+  {order.status === "ready" && "✅ Ready"}
+  {order.status === "delivered" && "🚚 Delivered"}
+</div>
 
         <p className="mt-4 text-gray-800 text-xl font-semibold">
           Table #{order.table_number}
